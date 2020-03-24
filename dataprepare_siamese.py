@@ -4,6 +4,7 @@ from PIL import Image
 import pickle
 import os
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import LabelEncoder
 
 
 data_path = 'actual_data'
@@ -13,10 +14,12 @@ valid_path = 'actual_data/valid'
 save_path= 'actual_data/'
 
 
+le = LabelEncoder()
+
 
 def load_image(path):
 	X = []
-	Y = []
+	classes = []
 
 	for img_folder in os.listdir(path):
 		image_folder_path = os.path.join(path,img_folder)
@@ -24,11 +27,19 @@ def load_image(path):
 			image_path = os.path.join(image_folder_path,img)
 			image = Image.open(image_path)
 			pixels = np.asarray(image)
+			classes.append(img_folder)
 			X.append(pixels)
-	return X	
+
+	Y = le.fit_transform(classes)
+	Y = to_categorical(Y,5)
+	X = np.array(datas)
+	return X,Y
+
+
 
 img_pixels = load_image(train_path)
 print(img_pixels)
+
 
 
 
