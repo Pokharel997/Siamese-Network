@@ -11,7 +11,7 @@ data_path = 'actual_data'
 train_path = 'actual_data/train'
 valid_path = 'actual_data/valid'
 
-save_path= 'actual_data/'
+save_path= 'face_detect/'
 
 
 le = LabelEncoder()
@@ -37,8 +37,12 @@ def load_image(path):
 
 
 
-img_pixels = load_image(train_path)
-print(img_pixels)
+X,y  = load_image(train_path)
+
+with open(os.path.join(save_path,"train.pickle"),"wb") as f:
+	pickle.dump(X,f)
+
+	
 
 
 
