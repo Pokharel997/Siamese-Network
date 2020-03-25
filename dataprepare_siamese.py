@@ -30,17 +30,17 @@ def load_image(path):
 			classes.append(img_folder)
 			X.append(pixels)
 
-	Y = le.fit_transform(classes)
-	Y = to_categorical(Y,5)
-	X = np.array(datas)
-	return X,Y
+	# Y = le.fit_transform(classes)
+	# Y = to_categorical(Y,5)
+	X = np.array(np.stack(datas))
+	return X,classes
 
 
 
 X,y  = load_image(train_path)
 
 with open(os.path.join(save_path,"train.pickle"),"wb") as f:
-	pickle.dump(X,f)
+	pickle.dump((X,y),f)
 
 	
 
