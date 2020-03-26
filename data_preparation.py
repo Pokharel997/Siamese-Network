@@ -36,19 +36,10 @@ def load_image(path):
 	# Y = to_categorical(Y,5)
 	return X,classes
 
-
-print(X, y)
-print(" ---------")
 try:
     X,y  = load_image(valid_path)
-    print(X, y)
-    print("^^^^^^^^^^")
 except:
     raise
-
-print(X, y)
-print("++++++++++++")
-
 
 with open(os.path.join(save_path,"test2.pickle"),"wb") as f:
 	pickle.dump((X,y),f)
